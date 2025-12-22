@@ -1,0 +1,104 @@
+.snippet-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  border-top: 1px solid $border;
+  font-size: 14px;
+  color: $text-muted;
+
+  .left {
+    display: flex;
+    gap: 12px;
+  }
+
+  .right {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    &:hover {
+      color: $blue;
+    }
+  }
+}
+
+.comment-form {
+  position: relative;
+  margin-top: 24px;
+
+  textarea {
+    width: 100%;
+    min-height: 120px;
+    padding: 14px 50px 14px 14px;
+    border: 1px solid $border;
+    border-radius: 6px;
+    resize: none;
+
+    &:focus {
+      outline: none;
+      border-color: $blue;
+    }
+  }
+
+  button {
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: #2ecc71;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+}
+
+.comments {
+  margin-top: 24px;
+}
+
+.comment {
+  padding: 12px 0;
+  border-bottom: 1px solid $border;
+
+  p {
+    margin: 6px 0;
+  }
+
+  span {
+    font-size: 12px;
+    color: $text-muted;
+  }
+}
+
+.snippet-card {
+  background: $white;
+  border: 1px solid $border;
+  margin-bottom: 16px;
+
+  .snippet-header {
+    padding: 8px 12px;
+    background: #f1f1f1;
+
+    @include flex-between;
+
+    .lang {
+      font-size: 12px;
+      color: $text-muted;
+    }
+  }
+
+  .snippet-code {
+    padding: 12px;
+    background: #fafafa;
+    overflow-x: auto;
+  }
+
+  .snippet-actions {
+    padding: 8px 12px;
+    color: $text-muted;
+  }
+}

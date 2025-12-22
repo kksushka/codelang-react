@@ -3,6 +3,7 @@
     "sass": "^1.97.1"
   },
   "dependencies": {
+    "socket.io-client": "^4.8.2",
     "zod": "^4.2.1"
   }
 }

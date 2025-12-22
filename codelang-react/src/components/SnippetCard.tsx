@@ -1,12 +1,21 @@
+import { useNavigate } from 'react-router-dom'
 import type { Snippet } from '../types/snippet'
 
-interface SnippetCardProps {
+interface Props {
   snippet: Snippet
 }
 
-const SnippetCard = ({ snippet }: SnippetCardProps) => {
+const SnippetCard = ({ snippet }: Props) => {
+  const navigate = useNavigate()
+
+  const openPost = () => {
+    navigate(`/snippets/${snippet.id}`, {
+      state: { snippet },
+    })
+  }
+
   return (
-    <div className="snippet-card">
+    <div className="snippet-card" onClick={openPost}>
       <div className="snippet-header">
         <b>{snippet.user.username}</b>
         <span className="lang">{snippet.language}</span>
@@ -15,7 +24,21 @@ const SnippetCard = ({ snippet }: SnippetCardProps) => {
       <pre className="snippet-code">{snippet.code}</pre>
 
       <div className="snippet-actions">
-        👍 0 👎 0
+        <div className="left">
+          <span>👍</span>
+          <span>👎</span>
+        </div>
+
+        <div
+          className="right"
+          role="button"
+          onClick={e => {
+            e.stopPropagation()
+            openPost()
+          }}
+        >
+          💬 Comments
+        </div>
       </div>
     </div>
   )
