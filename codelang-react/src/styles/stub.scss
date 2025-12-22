@@ -1,0 +1,47 @@
+.snippet-stub {
+  pointer-events: none;
+}
+
+.stub-line {
+  height: 12px;
+  background: linear-gradient(
+    90deg,
+    #eee 25%,
+    #ddd 37%,
+    #eee 63%
+  );
+  background-size: 400% 100%;
+  animation: stub-loading 1.4s ease infinite;
+  border-radius: 4px;
+}
+
+.stub-user {
+  width: 120px;
+}
+
+.stub-lang {
+  width: 60px;
+  height: 10px;
+}
+
+.stub-line + .stub-line {
+  margin-top: 8px;
+}
+
+.stub-line.short {
+  width: 60%;
+}
+
+.stub-line.small {
+  width: 80px;
+  height: 10px;
+}
+
+@keyframes stub-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}

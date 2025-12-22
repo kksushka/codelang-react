@@ -1,36 +1,39 @@
 import { useEffect, useState } from 'react'
 import { api } from '../services/api'
 import type { Snippet } from '../types/snippet'
+import SnippetCard from '../components/SnippetCard'
+import SnippetStub from '../components/SnippetStub'
 
 const Home = () => {
   const [snippets, setSnippets] = useState<Snippet[]>([])
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    api.get('/snippets').then(res => {
-      const list = res.data?.data?.data
-      setSnippets(Array.isArray(list) ? list : [])
-    })
+    api
+      .get('/snippets')
+      .then(res => {
+        const list = res.data?.data?.data
+        setSnippets(Array.isArray(list) ? list : [])
+      })
+      .finally(() => {
+        setIsLoading(false)
+      })
   }, [])
 
   return (
     <>
       <h1 className="welcome">Welcome to Codelang!</h1>
 
-      {snippets.map(snippet => (
-        <div key={snippet.id} className="snippet-card">
-          <div className="snippet-header">
-            <b>{snippet.user.username}</b>
-            <span className="lang">{snippet.language}</span>
-          </div>
+      {isLoading &&
+        Array.from({ length: 5 }).map((_, i) => (
+          <SnippetStub key={i} />
+        ))}
 
-          <pre className="snippet-code">{snippet.code}</pre>
-
-          <div className="snippet-actions">
-            👍 0 👎 0
-          </div>
-        </div>
-      ))}
-      </>
+      {!isLoading &&
+        snippets.map(snippet => (
+          <SnippetCard key={snippet.id} snippet={snippet} />
+        ))}
+    </>
   )
 }
 
