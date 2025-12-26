@@ -1,4 +1,4 @@
-import type { Comment } from '../types/comment'
+import type { Comment } from '../../types/comment'
 
 const CommentItem = ({ comment }: { comment: Comment }) => {
   return (

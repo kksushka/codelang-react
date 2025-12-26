@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
-import { useAuth } from '../hooks/useAuth'
-
+import { useAuth } from '../../context/AuthContext'
+import './Header.scss'
 interface HeaderProps {
   onToggleSidebar: () => void
 }

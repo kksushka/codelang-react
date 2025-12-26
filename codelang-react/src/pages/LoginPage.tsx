@@ -1,27 +1,42 @@
 import { useState } from 'react'
-import { api } from '../services/api'
 import { Link, useNavigate } from 'react-router-dom'
-import { useAuth } from '../hooks/useAuth'
-import type { LoginRequest, User } from '../types/auth'
+import { useAuth } from '../context/AuthContext'
+import type { LoginRequest } from '../types/auth'
+import { api } from '../api/api'
+
 
 const Login = () => {
   const navigate = useNavigate()
-  const { setUser } = useAuth()
+  const { login } = useAuth()
 
   const [form, setForm] = useState<LoginRequest>({
     username: '',
     password: ''
   })
+  const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault()
+    setError('')
+    setLoading(true)
 
     try {
-      const res = await api.post<User>('/auth/login', form)
-      setUser(res.data)
+      const res = await api.post('/auth/login', form)
+      const userData = res.data.data || res.data
+      
+      if (!userData?.id) {
+        throw new Error('Invalid response from server')
+      }
+      
+      login(userData)
       navigate('/')
-    } catch {
-      alert('Login failed')
+      
+    } catch (err: any) {
+      const errorMessage = err.response?.data?.message || 'Login failed'
+      setError(errorMessage)
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -29,6 +44,8 @@ const Login = () => {
     <div className="auth-page">
       <form className="auth-card" onSubmit={submit}>
         <h2>Sign in</h2>
+        
+        {error && <div className="error-message">{error}</div>}
 
         <div className="auth-field">
           <label>Username</label>
@@ -36,6 +53,8 @@ const Login = () => {
             placeholder="Enter username"
             value={form.username}
             onChange={e => setForm({ ...form, username: e.target.value })}
+            disabled={loading}
+            required
           />
         </div>
 
@@ -46,11 +65,17 @@ const Login = () => {
             placeholder="Enter password"
             value={form.password}
             onChange={e => setForm({ ...form, password: e.target.value })}
+            disabled={loading}
+            required
           />
         </div>
 
-        <button className="auth-button" type="submit">
-          Sign in
+        <button 
+          className="auth-button" 
+          type="submit"
+          disabled={loading}
+        >
+          {loading ? 'Signing in...' : 'Sign in'}
         </button>
 
         <p className="auth-footer">

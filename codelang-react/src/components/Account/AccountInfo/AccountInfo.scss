@@ -1,0 +1,185 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.account-info {
+  background: $white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 1.5rem; 
+  border: 1px solid $border;
+  transition: all 0.2s ease;
+
+  &:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  }
+
+  .info-header {
+    display: flex;
+    gap: 1.5rem; 
+    align-items: center;
+    margin-bottom: 1.5rem; 
+    padding-bottom: 1.5rem; 
+    border-bottom: 1px solid $border; 
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      text-align: center;
+      gap: 1.2rem;
+    }
+
+    .profile-image {
+      flex-shrink: 0;
+
+      .avatar {
+        width: 90px; 
+        height: 90px;
+        border-radius: 50%;
+        background: $blue;
+        color: $white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem; 
+        font-weight: bold;
+        font-family: "Bitter", serif;
+
+        &:hover {
+          background: $blue-dark;
+        }
+      }
+    }
+
+    .user-details {
+      flex: 1;
+
+      .username {
+        font-size: 1.5rem; 
+        color: darken($blue, 20%);
+        margin: 0 0 10px 0; 
+        font-weight: 600;
+        font-family: "Bitter", serif;
+      }
+
+      .user-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px; 
+        margin-bottom: 15px; 
+
+        .meta-item {
+          background: $bg;
+          padding: 6px 12px; 
+          border-radius: 15px; 
+          font-size: 0.85rem; 
+          color: $text-muted;
+          border: 1px solid $border;
+
+          strong {
+            color: $blue;
+            margin-right: 5px;
+          }
+        }
+      }
+
+      .action-buttons {
+        display: flex;
+        gap: 10px; 
+        flex-wrap: wrap;
+
+        .btn {
+          padding: 8px 16px; 
+          border-radius: 5px; 
+          font-size: 0.85rem; 
+          font-weight: 600;
+          border: none;
+          cursor: pointer;
+          transition: all 0.2s ease;
+          font-family: "Bitter", serif;
+          text-transform: uppercase;
+
+          &:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          }
+
+          &:active {
+            transform: translateY(0);
+          }
+
+          &-logout {
+            background: $blue;
+            color: $white;
+
+            &:hover {
+              background: $blue-dark;
+            }
+          }
+
+          &-delete {
+            background: #e74c3c;
+            color: $white;
+
+            &:hover {
+              background: darken(#e74c3c, 10%);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .stats-section {
+    h3 {
+      font-size: 1.2rem; 
+      color: darken($blue, 20%);
+      margin-bottom: 1rem; 
+      font-weight: 600;
+      font-family: "Bitter", serif;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); 
+      gap: 12px; 
+      .stat-card {
+        background: $bg;
+        border-radius: 6px; 
+        padding: 15px; 
+        text-align: center;
+        transition: all 0.2s ease;
+        border: 1px solid $border;
+
+        &:hover {
+          transform: translateY(-2px); 
+          box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08); 
+        }
+
+        &::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 2px; 
+          background: $blue;
+        }
+
+        .stat-value {
+          font-size: 1.8rem; 
+          font-weight: 700;
+          color: darken($blue, 20%);
+          margin-bottom: 4px;
+          font-family: "Bitter", serif;
+        }
+
+        .stat-label {
+          font-size: 0.8rem; 
+          color: $text-muted;
+          text-transform: uppercase;
+          letter-spacing: 0.3px;
+          font-weight: 600;
+        }
+      }
+    }
+  }
+}

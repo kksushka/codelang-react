@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react'
-import { useLocation, useParams } from 'react-router-dom'
-import { api } from '../services/api'
-import { socket } from '../services/socket'
-
-import SnippetCard from '../components/SnippetCard'
-import CommentList from '../components/CommentList'
-import CommentForm from '../components/CommentForm'
-
+import { useParams, useLocation } from 'react-router-dom'
+import { api } from '../api/api'
 import type { Snippet } from '../types/snippet'
 import type { Comment } from '../types/comment'
+import { getComments } from '../api/commentService'
+import SnippetCard from '../components/SnippetCard/SnippetCard'
+import CommentList from '../components/Comment/CommentList'
+import CommentForm from '../components/Comment/CommentForm'
+
+const POLL_INTERVAL = 3000 
 
 const SnippetPage = () => {
   const { id } = useParams<{ id: string }>()
@@ -26,12 +26,14 @@ const SnippetPage = () => {
     setLoading(true)
 
     Promise.all([
-      snippet ? Promise.resolve(snippet) : api.get(`/snippets/${id}`).then(r => r.data),
-      api.get('/comments', { params: { snippetId: id } }).then(r => r.data),
+      snippet
+        ? Promise.resolve(snippet)
+        : api.get(`/snippets/${id}`).then(r => r.data),
+      getComments(Number(id)),
     ])
       .then(([snippetData, commentsData]) => {
         setSnippet(snippetData)
-        setComments(Array.isArray(commentsData) ? commentsData : [])
+        setComments(commentsData)
       })
       .finally(() => setLoading(false))
   }, [id])
@@ -39,21 +41,12 @@ const SnippetPage = () => {
   useEffect(() => {
     if (!id) return
 
-    socket.connect()
-    socket.emit('join-snippet', id)
+    const interval = setInterval(async () => {
+      const fresh = await getComments(Number(id))
+      setComments(fresh)
+    }, POLL_INTERVAL)
 
-    socket.on('new-comment', (comment: Comment) => {
-      setComments(prev => {
-        if (prev.some(c => c.id === comment.id)) return prev
-        return [...prev, comment]
-      })
-    })
-
-    return () => {
-      socket.emit('leave-snippet', id)
-      socket.off('new-comment')
-      socket.disconnect()
-    }
+    return () => clearInterval(interval)
   }, [id])
 
   if (loading) return <div>Loading post...</div>
@@ -62,15 +55,8 @@ const SnippetPage = () => {
   return (
     <div className="post-page">
       <SnippetCard snippet={snippet} />
-
       <CommentList comments={comments} />
-
-      <CommentForm
-        snippetId={snippet.id}
-        onCreated={comment =>
-          setComments(prev => [...prev, comment])
-        }
-      />
+      <CommentForm snippetId={snippet.id} />
     </div>
   )
 }

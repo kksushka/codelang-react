@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom'
-import type { Snippet } from '../types/snippet'
+import './SnippetCard.scss'
+import type { Snippet } from '../../types/snippet'
 
 interface Props {
   snippet: Snippet

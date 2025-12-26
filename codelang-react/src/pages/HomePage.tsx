@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
-import { api } from '../services/api'
+import { api } from '../api/api'
 import type { Snippet } from '../types/snippet'
-import SnippetCard from '../components/SnippetCard'
-import SnippetStub from '../components/SnippetStub'
+import SnippetStub from '../components/SnippetStub/SnippetStub'
+import SnippetCard from '../components/SnippetCard/SnippetCard'
 
 const Home = () => {
   const [snippets, setSnippets] = useState<Snippet[]>([])

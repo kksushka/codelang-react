@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom'
-
+import './Sidebar.scss'
 interface SidebarProps {
   isOpen: boolean
 }

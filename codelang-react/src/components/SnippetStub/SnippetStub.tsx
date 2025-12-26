@@ -1,3 +1,5 @@
+import './SnippetStub.scss'
+
 const SnippetStub = () => {
   return (
     <div className="snippet-card snippet-stub">

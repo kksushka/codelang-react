@@ -1,0 +1,127 @@
+@import '../../../styles/variables';
+
+.forms-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.2rem; 
+  margin-top: 2rem; 
+}
+
+.form-card {
+  background: $white;
+  border-radius: 10px;
+  padding: 1.2rem; 
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05); 
+  border: 1px solid $border;
+  transition: all 0.2s ease;
+
+  &:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+
+  h3 {
+    font-size: 1.1rem; 
+    color: darken($blue, 20%);
+    margin-bottom: 1.2rem;
+    padding-bottom: 10px; 
+    border-bottom: 1px solid $border;
+    font-family: "Bitter", serif;
+    font-weight: 600;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px; 
+
+    label {
+      font-size: 0.85rem; 
+      font-weight: 600;
+      color: darken($blue, 10%);
+      font-family: "Bitter", serif;
+    }
+
+    input {
+      padding: 10px 14px; 
+      border: 1px solid $border;
+      border-radius: 5px; 
+      font-size: 0.95rem; 
+      font-family: "Bitter", serif;
+      transition: all 0.2s ease;
+      background: $white;
+
+      &:focus {
+        outline: none;
+        border-color: $blue;
+        box-shadow: 0 0 0 2px rgba($blue, 0.1);
+      }
+
+      &:disabled {
+        background: lighten($bg, 2%);
+        cursor: not-allowed;
+        opacity: 0.7;
+      }
+
+      &::placeholder {
+        color: lighten($text-muted, 20%);
+      }
+    }
+  }
+
+  .btn {
+    padding: 10px 18px;
+    background: $blue;
+    color: $white;
+    border: none;
+    border-radius: 5px; 
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: "Bitter", serif;
+    text-transform: uppercase;
+    margin-top: 6px;
+
+    &:hover:not(:disabled) {
+      background: $blue-dark;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba($blue, 0.2);
+    }
+
+    &:active:not(:disabled) {
+      transform: translateY(0);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      background: lighten($blue, 30%);
+    }
+  }
+
+  .message {
+    padding: 10px 14px; 
+    border-radius: 5px; 
+    font-size: 0.85rem; 
+    font-weight: 500;
+    font-family: "Bitter", serif;
+    
+    &.error {
+      background: lighten(#e74c3c, 40%);
+      color: darken(#e74c3c, 10%);
+      border-left: 3px solid #e74c3c;
+    }
+    
+    &.success {
+      background: lighten(#2ecc71, 40%);
+      color: darken(#2ecc71, 10%);
+      border-left: 3px solid #2ecc71;
+    }
+  }
+}

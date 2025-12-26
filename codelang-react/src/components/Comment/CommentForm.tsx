@@ -1,14 +1,12 @@
 import { useState } from 'react'
-import { api } from '../services/api'
-import { useAuth } from '../hooks/useAuth'
-import type { Comment } from '../types/comment'
+import { useAuth } from '../../context/AuthContext'
+import { api } from '../../api/api'
 
 interface Props {
   snippetId: number
-  onCreated: (comment: Comment) => void
 }
 
-const CommentForm = ({ snippetId, onCreated }: Props) => {
+const CommentForm = ({ snippetId }: Props) => {
   const { user } = useAuth()
   const [text, setText] = useState('')
   const [loading, setLoading] = useState(false)
@@ -22,12 +20,10 @@ const CommentForm = ({ snippetId, onCreated }: Props) => {
     setLoading(true)
 
     try {
-      const res = await api.post<Comment>('/comments', {
+      await api.post('/comments', {
         content: text,
         snippetId,
       })
-
-      onCreated(res.data)
       setText('')
     } finally {
       setLoading(false)
@@ -35,15 +31,12 @@ const CommentForm = ({ snippetId, onCreated }: Props) => {
   }
 
   return (
-    <form className="comment-form" onSubmit={submit}>
+    <form onSubmit={submit}>
       <textarea
-        placeholder="Write a comment..."
         value={text}
         onChange={e => setText(e.target.value)}
       />
-      <button type="submit" disabled={loading}>
-        Send
-      </button>
+      <button disabled={loading}>Send</button>
     </form>
   )
 }

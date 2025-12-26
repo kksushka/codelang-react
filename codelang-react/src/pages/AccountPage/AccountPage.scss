@@ -1,0 +1,55 @@
+@import '../../styles/variables';
+
+.account-page {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 24px;
+
+  .welcome-title {
+    font-size: 2rem;
+    color: darken($blue, 20%);
+    margin-bottom: 2.5rem; 
+    text-align: center;
+    font-weight: 600;
+    font-family: "Bitter", serif;
+    position: relative;
+    padding-bottom: 12px;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background: $blue;
+    }
+  }
+
+  .account-container {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem; 
+  }
+
+  .loading {
+    text-align: center;
+    padding: 40px 20px;
+    font-size: 1.1rem;
+    color: $text-muted;
+    font-family: "Bitter", serif;
+  }
+
+  .error-message {
+    background: lighten(#e74c3c, 40%);
+    color: darken(#e74c3c, 10%);
+    padding: 16px;
+    border-radius: 8px;
+    margin: 20px 0;
+    text-align: center;
+    font-size: 1rem;
+    border-left: 4px solid #e74c3c;
+    font-family: "Bitter", serif;
+  }
+}

@@ -1,0 +1,60 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  height: $header-height;
+  background: $blue;
+  color: $white;
+  padding: 0 25px;
+
+  z-index: 1000;
+  @include flex-between;
+
+  .logo {
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    span {
+      font-size: 16px;
+      text-transform: uppercase;
+    }
+  }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    &-ln {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    button {
+      background-color: $white;
+      color: rgb(113, 112, 112);
+      border: none;
+      font-family: "Bitter", serif;
+      text-transform: uppercase;
+      border-radius: 6px;
+      padding: 8px 14px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: 0.1s linear;
+
+      &:hover {
+        background-color: #dad9d9;
+        color: #686666;
+      }
+    }
+  }
+}

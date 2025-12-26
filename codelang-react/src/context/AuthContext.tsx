@@ -1,11 +1,20 @@
-import { createContext, useEffect, useState } from 'react'
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  useCallback,
+} from 'react'
 import type { User } from '../types/auth'
+import { api } from '../api/api'
 
 interface AuthContextValue {
   user: User | null
   isLoading: boolean
+  isAuth: boolean
+  login: (userData: User) => void
+  logout: () => void
   setUser: (user: User | null) => void
-  logout: () => Promise<void>
 }
 
 export const AuthContext = createContext<AuthContextValue | null>(null)
@@ -15,25 +24,55 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    const savedUser = localStorage.getItem('user')
-
-    if (savedUser) {
-      setUser(JSON.parse(savedUser))
-    } else {
-      setUser(null)
+    const checkAuth = async () => {
+      try {
+        const response = await api.get('/auth')
+        const userData = response.data.data || response.data
+        setUser(userData)
+      } catch {
+        setUser(null)
+      } finally {
+        setIsLoading(false)
+      }
     }
 
-    setIsLoading(false)
+    checkAuth()
   }, [])
 
-  const logout = async () => {
-    localStorage.removeItem('user')
-    setUser(null)
+  const login = useCallback((userData: User) => {
+    setUser(userData)
+    localStorage.setItem('user', JSON.stringify(userData))
+  }, [])
+
+  const logout = useCallback(async () => {
+    try {
+      await api.post('/auth/logout')
+    } finally {
+      setUser(null)
+      localStorage.removeItem('user')
+    }
+  }, [])
+
+  const value: AuthContextValue = {
+    user,
+    isLoading,
+    isAuth: !!user,
+    login,
+    logout,
+    setUser,
   }
 
   return (
-    <AuthContext.Provider value={{ user, isLoading, setUser, logout }}>
+    <AuthContext.Provider value={value}>
       {children}
     </AuthContext.Provider>
   )
+}
+
+export const useAuth = () => {
+  const context = useContext(AuthContext)
+  if (!context) {
+    throw new Error('useAuth must be used within AuthProvider')
+  }
+  return context
 }

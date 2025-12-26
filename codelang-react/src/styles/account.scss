@@ -1,0 +1,93 @@
+.account {
+  padding: 32px;
+
+  &__title {
+    margin-bottom: 24px;
+
+    span {
+      color: #2f80ed;
+    }
+  }
+
+  &__card {
+    display: flex;
+    gap: 40px;
+    background: #fff;
+    padding: 24px;
+    border-radius: 8px;
+    margin-bottom: 32px;
+  }
+
+  &__user {
+    display: flex;
+    gap: 20px;
+  }
+
+  &__avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: #e0e0e0;
+  }
+
+  &__info {
+    p {
+      margin: 4px 0;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 12px;
+  }
+
+  &__stats {
+    p {
+      margin: 4px 0;
+    }
+  }
+
+  &__forms {
+    display: flex;
+    gap: 40px;
+  }
+
+  &__form {
+    flex: 1;
+    background: #fff;
+    padding: 24px;
+    border-radius: 8px;
+
+    h3 {
+      margin-bottom: 16px;
+    }
+
+    input {
+      width: 100%;
+      margin-bottom: 12px;
+      padding: 8px;
+    }
+  }
+}
+
+/* buttons */
+.btn {
+  padding: 10px;
+  border-radius: 4px;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+
+  &--green {
+    background: #27ae60;
+  }
+
+  &--orange {
+    background: #f2994a;
+  }
+
+  &--red {
+    background: #eb5757;
+  }
+}
