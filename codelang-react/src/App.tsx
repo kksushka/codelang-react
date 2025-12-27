@@ -11,6 +11,8 @@ import EditSnippetPage from './pages/EditSnippetPage/EditSnippetPage'
 import MySnippetsPage from './pages/MySnippetsPage/MySnippetsPage'
 import UsersPage from './pages/UsersPage/UsersPage'
 import UserPage from './pages/UserPage/UserPage'
+import QuestionsPage from './pages/QuestionsPage/QuestionsPage'
+import CreateQuestionPage from './pages/CreateQuestionPage/CreateQuestionPage'
 
 const App = () => {
   const { isLoading } = useAuth()
@@ -33,6 +35,8 @@ const App = () => {
           <Route path="/my-snippets" element={<MySnippetsPage />} />
           <Route path="/users" element={<UsersPage />} />
           <Route path="/users/:id" element={<UserPage />} />
+          <Route path="/questions" element={<QuestionsPage />} />
+          <Route path="/questions/create" element={<CreateQuestionPage />} />
 
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
