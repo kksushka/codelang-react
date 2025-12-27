@@ -18,7 +18,7 @@ const Sidebar = ({ isOpen }: SidebarProps) => {
         <svg xmlns="http://www.w3.org/2000/svg" fill="#fff" width="18px" height="18px" viewBox="0 0 32 32"><path d="M16 15.503A5.041 5.041 0 1 0 16 5.42a5.041 5.041 0 0 0 0 10.083zm0 2.215c-6.703 0-11 3.699-11 5.5v3.363h22v-3.363c0-2.178-4.068-5.5-11-5.5z" /></svg>
         <span>My Account</span>
       </NavLink>
-      <NavLink to="/post" className="nav-item">
+      <NavLink to="/create" className="nav-item">
         <svg xmlns="http://www.w3.org/2000/svg" fill="#fff" height="18px" width="18px" version="1.1" id="Layer_1" viewBox="0 0 472.615 472.615">
           <g>
             <g>

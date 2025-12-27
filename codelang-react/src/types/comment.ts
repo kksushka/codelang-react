@@ -6,4 +6,7 @@ export interface Comment {
     username: string
     role: string
   }
+  snippetId?: number
+  createdAt?: string
+  updatedAt?: string
 }

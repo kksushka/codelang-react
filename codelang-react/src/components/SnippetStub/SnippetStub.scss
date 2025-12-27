@@ -18,6 +18,14 @@
   border-radius: 4px;
 }
 
+.snippet-header {
+  .header-left {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+}
+
 .stub-user {
   width: 120px;
 }
@@ -27,17 +35,42 @@
   height: 10px;
 }
 
-.stub-line + .stub-line {
-  margin-top: 8px;
+.stub-id {
+  width: 40px;
+  height: 10px;
+}
+
+.snippet-code {
+  .stub-line {
+    margin-bottom: 8px;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
 }
 
 .stub-line.short {
   width: 60%;
 }
 
-.stub-line.small {
-  width: 80px;
-  height: 10px;
+.snippet-actions {
+  .actions-left {
+    display: flex;
+    gap: 8px;
+    
+    .stub-button {
+      width: 50px;
+      height: 24px;
+    }
+  }
+  
+  .actions-right {
+    .stub-comments {
+      width: 80px;
+      height: 14px;
+    }
+  }
 }
 
 @keyframes stub-loading {
