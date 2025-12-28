@@ -58,7 +58,7 @@ const CreateQuestionPage = () => {
   return (
     <div className="create-question-page">
       <div className="page-header">
-        <h1>Ask a question</h1>
+        <h1 className="page-title">Ask a question</h1>
 
         <button
           className="close-btn"
@@ -68,7 +68,6 @@ const CreateQuestionPage = () => {
           ✕
         </button>
       </div>
-
       <form className="question-form" onSubmit={handleSubmit}>
         {error && <div className="error-message">{error}</div>}
 

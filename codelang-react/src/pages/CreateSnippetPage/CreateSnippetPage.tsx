@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { api } from '../../api/api'
-import type { CreateSnippetRequest } from '../../types/snippet'
 import './CreateSnippetPage.scss'
 import { LanguageSelect, SnippetEditor } from '../../components/Snippets'
+import type { CreateSnippetRequest } from '../../types/api'
 
 const CreateSnippetPage = () => {
   const navigate = useNavigate()

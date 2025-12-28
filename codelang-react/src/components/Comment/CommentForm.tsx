@@ -1,44 +1,49 @@
-import { useState } from 'react'
-import { useAuth } from '../../context/AuthContext'
-import { api } from '../../api/api'
+import { useState } from 'react';
+import { api } from '../../api/api';
+import socket from '../../socket';
+import type { CommentDto } from '../../types/comment';
+import './CommentForm.scss';
 
 interface Props {
-  snippetId: number
+  snippetId: number;
 }
 
 const CommentForm = ({ snippetId }: Props) => {
-  const { user } = useAuth()
-  const [text, setText] = useState('')
-  const [loading, setLoading] = useState(false)
-
-  if (!user) return <p>You must be logged in to comment</p>
+  const [text, setText] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const submit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!text.trim()) return
+    e.preventDefault();
+    if (!text.trim()) return;
 
-    setLoading(true)
+    setLoading(true);
 
     try {
-      await api.post('/comments', {
+      const res = await api.post('/comments', {
         content: text,
         snippetId,
-      })
-      setText('')
+      });
+
+      const comment: CommentDto = res.data.data ?? res.data;
+      socket.emit('newComment', comment);
+      setText('');
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   return (
-    <form onSubmit={submit}>
-      <textarea
-        value={text}
-        onChange={e => setText(e.target.value)}
-      />
-      <button disabled={loading}>Send</button>
+    <form className="comment-form" onSubmit={submit}>
+        <textarea
+          placeholder="Write a comment..."
+          value={text}
+          onChange={e => setText(e.target.value)}
+        />
+        <button type="submit" disabled={!text.trim() || loading}>
+          Send
+        </button>
     </form>
-  )
-}
+  );
+};
 
-export default CommentForm
+export default CommentForm;

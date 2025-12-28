@@ -5,15 +5,15 @@ interface LanguageSelectProps {
   selectedLanguage: string
   onChange: (language: string) => void
   loading?: boolean
-  disabled?: boolean 
+  disabled?: boolean
 }
 
-const LanguageSelect = ({ 
-  languages, 
-  selectedLanguage, 
-  onChange, 
+const LanguageSelect = ({
+  languages,
+  selectedLanguage,
+  onChange,
   loading = false,
-  disabled = false 
+  disabled = false
 }: LanguageSelectProps) => {
   const [isOpen, setIsOpen] = useState(false)
 
@@ -24,16 +24,16 @@ const LanguageSelect = ({
   }, [languages, selectedLanguage, disabled])
 
   const handleSelect = (language: string) => {
-    if (disabled) return 
-    
+    if (disabled) return
+
     console.log('Language selected:', language)
     onChange(language)
     setIsOpen(false)
   }
 
   const handleToggle = () => {
-    if (disabled) return 
-    
+    if (disabled) return
+
     setIsOpen(!isOpen)
   }
 
@@ -50,7 +50,7 @@ const LanguageSelect = ({
 
   return (
     <div className={`language-select ${isOpen ? 'open' : ''} ${disabled ? 'disabled' : ''}`}>
-      <div 
+      <div
         className="select-header"
         onClick={handleToggle}
       >
@@ -59,7 +59,7 @@ const LanguageSelect = ({
         </span>
         <span className="dropdown-arrow">▼</span>
       </div>
-      
+
       {isOpen && !disabled && (
         <div className="select-dropdown">
           {validLanguages.length === 0 ? (

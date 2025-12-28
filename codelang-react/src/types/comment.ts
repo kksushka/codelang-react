@@ -1,12 +1,9 @@
-export interface Comment {
-  id: number
-  content: string
+export interface CommentDto {
+  id: number;
+  content: string;
+  snippetId: number;
   user: {
-    id: number
-    username: string
-    role: string
-  }
-  snippetId?: number
-  createdAt?: string
-  updatedAt?: string
+    id: number;
+    username: string;
+  };
 }

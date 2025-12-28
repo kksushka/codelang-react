@@ -8,10 +8,10 @@ interface SnippetEditorProps {
   height?: string
 }
 
-const SnippetEditor = ({ 
-  code, 
-  language, 
-  onChange, 
+const SnippetEditor = ({
+  code,
+  language,
+  onChange,
   placeholder = '',
   height = '400px'
 }: SnippetEditorProps) => {
@@ -38,11 +38,11 @@ const SnippetEditor = ({
 
       const start = textarea.selectionStart
       const end = textarea.selectionEnd
-      
+
       const newCode = code.substring(0, start) + '  ' + code.substring(end)
-      
+
       onChange(newCode)
-      
+
       setTimeout(() => {
         textarea.selectionStart = textarea.selectionEnd = start + 2
       }, 0)

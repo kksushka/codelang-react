@@ -51,7 +51,12 @@ const UserPage = () => {
   }
 
   if (isLoading) {
-    return <div className="user-page">Loading user...</div>
+    return (
+      <div className="page-loader">
+        <div className="spinner" />
+        <p>Loading user...</p>
+      </div>
+    )
   }
 
   if (error) {

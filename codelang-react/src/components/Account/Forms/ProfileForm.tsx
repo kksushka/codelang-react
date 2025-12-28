@@ -16,7 +16,7 @@ const ProfileForm = ({ currentUsername, onUpdate }: ProfileFormProps) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    
+
     if (username === currentUsername) {
       setError('Username is the same as current')
       return
@@ -31,15 +31,15 @@ const ProfileForm = ({ currentUsername, onUpdate }: ProfileFormProps) => {
       setLoading(true)
       setError('')
       setSuccess('')
-      
+
       const response = await api.patch('/me', { username })
-      
+
       if (response.data.updatedCount > 0) {
         setSuccess('Profile updated successfully')
-        
+
         const userResponse = await api.get<{ data: User }>('/me')
         const userData = userResponse.data.data || userResponse.data
-        
+
         onUpdate(userData)
       }
     } catch (err: any) {
@@ -53,7 +53,7 @@ const ProfileForm = ({ currentUsername, onUpdate }: ProfileFormProps) => {
   return (
     <div className="form-card">
       <h3>Edit Your Profile</h3>
-      
+
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="username">Change your username</label>
@@ -71,8 +71,8 @@ const ProfileForm = ({ currentUsername, onUpdate }: ProfileFormProps) => {
         {error && <div className="message error">{error}</div>}
         {success && <div className="message success">{success}</div>}
 
-        <button 
-          type="submit" 
+        <button
+          type="submit"
           className="btn btn-primary"
           disabled={loading || username === currentUsername}
         >

@@ -1,51 +1,26 @@
+import type { CommentDto } from './comment'
+
 export interface Snippet {
   id: number
-  language: string
   code: string
+  language: string
   user: {
     id: number
     username: string
-    role: string
   }
-}
+  comments?: CommentDto[]
+  marks: Mark[]
+  likesCount: number
+  dislikesCount: number
+  myMark?: MarkType
 
-export interface ApiResponse<T> {
-  data: T
-  message?: string
 }
-
-export interface CreateSnippetRequest {
-  code: string
-  language: string
-}
-
-export interface UpdateSnippetRequest {
-  code?: string
-  language?: string
-}
-
-export interface SnippetListResponse {
-  data: Snippet[]
-  meta: {
-    itemsPerPage: number
-    totalItems: number
-    currentPage: number
-    totalPages: number
-    sortBy: [string, string][]
-    searchBy: string[]
-    search: string
-    select: string[]
-    filter: Record<string, any>
+export type MarkType = 'like' | 'dislike'
+export interface Mark {
+  id: number
+  type: MarkType
+  user: {
+    id: number
+    username: string
   }
-  links: {
-    first: string
-    previous: string
-    current: string
-    next: string
-    last: string
-  }
-}
-
-export interface MarkRequest {
-  mark: 'like' | 'dislike'
 }

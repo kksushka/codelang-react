@@ -105,3 +105,40 @@
     color: $text-muted;
   }
 }
+
+.like-btn, .dislike-btn {
+  background: none;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  padding: 6px 12px;
+  color: #6c757d;
+  cursor: pointer;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+  
+  &:hover:not(:disabled) {
+    background: #f8f9fa;
+  }
+  
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+  
+  &.active {
+    color: white;
+  }
+}
+
+.like-btn.active {
+  background: #28a745;
+  border-color: #28a745;
+}
+
+.dislike-btn.active {
+  background: #dc3545;
+  border-color: #dc3545;
+}

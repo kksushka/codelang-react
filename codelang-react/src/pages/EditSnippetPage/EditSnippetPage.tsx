@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { api } from '../../api/api'
 import { useAuth } from '../../context/AuthContext'
-import type { Snippet, UpdateSnippetRequest } from '../../types/snippet'
 import './EditSnippetPage.scss'
+import type { Snippet } from '../../types/snippet'
+import type { UpdateSnippetRequest } from '../../types/api'
 
 const EditSnippetPage = () => {
     const { id } = useParams<{ id: string }>()
@@ -115,7 +116,12 @@ const EditSnippetPage = () => {
     }
 
     if (isLoading) {
-        return <div className="edit-snippet-page">Loading...</div>
+        return (
+            <div className="page-loader">
+                <div className="spinner" />
+                <p>Loading snippet...</p>
+            </div>
+        )
     }
 
     if (error && !snippet) {

@@ -4,6 +4,41 @@
     padding: 24px;
 }
 
+.page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+
+    .page-title {
+        margin: 0;
+        font-size: 22px;
+        font-weight: 600;
+        color: #111;
+    }
+
+    .close-btn {
+        background: none;
+        border: none;
+        font-size: 22px;
+        cursor: pointer;
+        color: #888;
+        padding: 6px 10px;
+        line-height: 1;
+        border-radius: 6px;
+        transition: background 0.15s ease, color 0.15s ease;
+
+        &:hover {
+            background: #f1f1f1;
+            color: #000;
+        }
+
+        &:active {
+            background: #e5e5e5;
+        }
+    }
+}
+
 .questions-header {
     display: flex;
     justify-content: space-between;
@@ -43,10 +78,7 @@
             color: #000;
         }
     }
-
 }
-
-
 
 .question-form {
     display: flex;
@@ -56,22 +88,34 @@
     input,
     textarea {
         width: 100%;
-        padding: 12px;
+        padding: 12px 14px;
         border-radius: 6px;
         border: 1px solid #ddd;
         font-size: 14px;
         resize: vertical;
+        transition: border-color 0.15s ease, box-shadow 0.15s ease;
 
         &:focus {
             outline: none;
             border-color: #3b82f6;
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.15);
         }
+
+        &:disabled {
+            background: #f9f9f9;
+            cursor: not-allowed;
+        }
+    }
+
+    textarea {
+        min-height: 120px;
     }
 
     .code-label {
         font-size: 14px;
         font-weight: 500;
         color: #555;
+        margin-top: 4px;
     }
 
     .code-editor {
@@ -81,22 +125,29 @@
     }
 
     .form-actions {
-        margin-top: 12px;
         display: flex;
         justify-content: flex-end;
+        margin-top: 8px;
     }
 
     .btn-primary {
         background: #3b82f6;
         color: #fff;
         border: none;
-        padding: 10px 20px;
+        padding: 10px 22px;
         border-radius: 6px;
         font-size: 14px;
+        font-weight: 500;
         cursor: pointer;
+        transition: background 0.15s ease, transform 0.1s ease;
 
         &:hover:not(:disabled) {
             background: #2563eb;
+            transform: translateY(-1px);
+        }
+
+        &:active:not(:disabled) {
+            transform: translateY(0);
         }
 
         &:disabled {

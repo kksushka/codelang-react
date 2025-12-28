@@ -82,3 +82,38 @@
     }
   }
 }
+.skeleton {
+  pointer-events: none;
+}
+
+.skeleton-username,
+.skeleton-role {
+  background: linear-gradient(
+    90deg,
+    #eee 25%,
+    #f5f5f5 37%,
+    #eee 63%
+  );
+  background-size: 400% 100%;
+  animation: skeleton-loading 1.4s ease infinite;
+  border-radius: 6px;
+}
+
+.skeleton-username {
+  height: 14px;
+  width: 40%;
+}
+
+.skeleton-role {
+  height: 18px;
+  width: 60px;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}

@@ -44,9 +44,25 @@ const UsersPage = () => {
     }
   }
 
-  if (isLoading) {
-    return <div className="users-page">Loading users...</div>
-  }
+if (isLoading) {
+  return (
+    <div className="users-page">
+      <div className="page-header">
+        <h1>Users</h1>
+        <p>Community members</p>
+      </div>
+
+      <div className="users-list">
+        {[1, 2, 3, 4].map(i => (
+          <div key={i} className="user-row skeleton">
+            <div className="skeleton-username" />
+            <div className="skeleton-role" />
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
 
   if (error) {
     return (

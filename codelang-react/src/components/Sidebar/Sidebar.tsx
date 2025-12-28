@@ -1,12 +1,29 @@
 import { NavLink } from 'react-router-dom'
 import './Sidebar.scss'
+import { useAuth } from '../../context/AuthContext'
+
 interface SidebarProps {
   isOpen: boolean
 }
 
 const Sidebar = ({ isOpen }: SidebarProps) => {
+  const { user } = useAuth()
+  
   return (
     <aside className={`sidebar ${!isOpen ? 'collapsed' : ''}`}>
+      {user && (
+        <NavLink to="/account" className="sidebar-user">
+          <div className="avatar">
+            {user.username ? user.username.charAt(0).toUpperCase() : 'U'}
+          </div>
+
+          <div className="user-info">
+            <span className="username">{user.username}</span>
+            <span className="profile-link">My account</span>
+          </div>
+        </NavLink>
+      )}
+      <div className="sidebar-divider" />
       <NavLink to="/" className="nav-item">
         <svg className='sidebar__icon' width="18px" height="18px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M15 18H9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />

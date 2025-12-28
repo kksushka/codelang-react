@@ -1,0 +1,54 @@
+@import '../../styles/mixins';
+@import '../../styles/variables';
+
+.comment-form {
+  padding: 16px;
+  background: $white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  position: relative; 
+
+  textarea {
+    width: 100%;
+    min-height: 80px;
+    max-height: 200px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid $border;
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 1.4;
+    resize: none;
+    outline: none;
+    box-sizing: border-box;
+    margin-bottom: 45px; 
+    
+    &:focus {
+      border-color: $blue;
+    }
+  }
+
+  button {
+    position: absolute; 
+    left: 16px; 
+    bottom: 16px;
+    width: 100px; 
+    height: 35px; 
+    background: $blue;
+    color: $white;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    
+    &:hover:not(:disabled) {
+      background: $blue-dark;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+}

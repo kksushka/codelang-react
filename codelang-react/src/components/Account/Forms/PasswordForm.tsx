@@ -20,7 +20,7 @@ const PasswordForm = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    
+
     if (!form.oldPassword || !form.newPassword || !form.confirmPassword) {
       setError('All fields are required')
       return
@@ -40,12 +40,12 @@ const PasswordForm = () => {
       setLoading(true)
       setError('')
       setSuccess('')
-      
+
       const response = await api.patch('/me/password', {
         oldPassword: form.oldPassword,
         newPassword: form.newPassword
       })
-      
+
       if (response.data.updatedCount > 0) {
         setSuccess('Password changed successfully')
         setForm({
@@ -65,7 +65,7 @@ const PasswordForm = () => {
   return (
     <div className="form-card">
       <h3>Change Your Password</h3>
-      
+
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="oldPassword">Current Password</label>
@@ -109,8 +109,8 @@ const PasswordForm = () => {
         {error && <div className="message error">{error}</div>}
         {success && <div className="message success">{success}</div>}
 
-        <button 
-          type="submit" 
+        <button
+          type="submit"
           className="btn btn-primary"
           disabled={loading}
         >
